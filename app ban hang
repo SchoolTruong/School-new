@@ -1,0 +1,63 @@
+import { useState } from "react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+
+export default function SimplePOS() {
+  const [productName, setProductName] = useState("");
+  const [productPrice, setProductPrice] = useState("");
+  const [cart, setCart] = useState([]);
+
+  const addToCart = () => {
+    if (productName && productPrice) {
+      const newItem = {
+        name: productName,
+        price: parseFloat(productPrice),
+      };
+      setCart([...cart, newItem]);
+      setProductName("");
+      setProductPrice("");
+    }
+  };
+
+  const total = cart.reduce((sum, item) => sum + item.price, 0);
+
+  return (
+    <div className="p-4 max-w-md mx-auto">
+      <h1 className="text-xl font-bold mb-4">Phần mềm bán hàng đơn giản</h1>
+      <Card className="mb-4">
+        <CardContent className="space-y-2 p-4">
+          <Input
+            placeholder="Tên sản phẩm"
+            value={productName}
+            onChange={(e) => setProductName(e.target.value)}
+          />
+          <Input
+            placeholder="Giá sản phẩm"
+            type="number"
+            value={productPrice}
+            onChange={(e) => setProductPrice(e.target.value)}
+          />
+          <Button onClick={addToCart}>Thêm vào giỏ</Button>
+        </CardContent>
+      </Card>
+
+      <Card>
+        <CardContent className="p-4">
+          <h2 className="font-semibold mb-2">Giỏ hàng:</h2>
+          <ul className="space-y-1">
+            {cart.map((item, index) => (
+              <li key={index} className="flex justify-between">
+                <span>{item.name}</span>
+                <span>{item.price.toLocaleString()}₫</span>
+              </li>
+            ))}
+          </ul>
+          <div className="mt-4 font-bold text-right">
+            Tổng cộng: {total.toLocaleString()}₫
+          </div>
+        </CardContent>
+      </Card>
+    </div>
+  );
+}
