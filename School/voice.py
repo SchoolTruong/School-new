@@ -9,7 +9,7 @@ import numpy as np
 
 SAMPLE_RATE = 16000
 BLOCK_SECS = 0.1
-SILENCE_THRESHOLD = float(os.getenv("JARVIS_SILENCE", "500"))  # tăng nếu phòng ồn
+SILENCE_THRESHOLD = float(os.getenv("SCHOOL_SILENCE", "500"))  # tăng nếu phòng ồn
 END_SILENCE_SECS = 1.2   # im lặng bao lâu thì coi như đã nói xong
 WAIT_FOR_SPEECH_SECS = 8  # chờ người nói tối đa bao lâu
 MAX_SPEECH_SECS = 30
@@ -21,7 +21,7 @@ def record() -> str | None:
 
     block = int(SAMPLE_RATE * BLOCK_SECS)
     frames, started, silent_for, elapsed = [], False, 0.0, 0.0
-    print("🎙  Đang nghe... (Sếp cứ nói, im lặng là JARVIS xử lý)")
+    print("🎙  Đang nghe... (Sếp cứ nói, im lặng là SCHOOL xử lý)")
     with sd.InputStream(samplerate=SAMPLE_RATE, channels=1, dtype="int16") as stream:
         while elapsed < MAX_SPEECH_SECS:
             data, _ = stream.read(block)
@@ -57,8 +57,8 @@ def transcribe(path: str) -> str:
 
 
 def speak(text: str) -> None:
-    print(f"\n🤖 JARVIS: {text}\n")
+    print(f"\n🤖 SCHOOL: {text}\n")
     if sys.platform == "darwin":
-        voice = os.getenv("JARVIS_VOICE", "Linh")
-        rate = os.getenv("JARVIS_RATE", "190")
+        voice = os.getenv("SCHOOL_VOICE", "Linh")
+        rate = os.getenv("SCHOOL_RATE", "190")
         subprocess.run(["say", "-v", voice, "-r", rate, text])

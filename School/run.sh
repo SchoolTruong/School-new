@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Cài đặt lần đầu và khởi chạy JARVIS. Dùng: ./run.sh  hoặc  ./run.sh --text
+# Cài đặt lần đầu và khởi chạy SCHOOL. Dùng: ./run.sh  hoặc  ./run.sh --text
 set -e
 cd "$(dirname "$0")"
 
@@ -23,4 +23,4 @@ if [ "$(uname)" = "Darwin" ]; then
   fi
 fi
 
-exec .venv/bin/python jarvis.py "$@"
+exec .venv/bin/python school.py "$@"

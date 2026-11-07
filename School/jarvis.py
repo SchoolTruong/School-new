@@ -1,4 +1,4 @@
-"""JARVIS — trợ lý ảo điều khiển Mac và internet bằng giọng nói hoặc gõ phím.
+"""SCHOOL — trợ lý ảo điều khiển Mac và internet bằng giọng nói hoặc gõ phím.
 
 Chạy:  ./run.sh            (nói chuyện bằng giọng)
        ./run.sh --text     (chỉ gõ phím)
@@ -16,10 +16,10 @@ import anthropic  # noqa: E402
 
 import tools  # noqa: E402
 
-MODEL = os.getenv("JARVIS_MODEL", "claude-sonnet-5-5")
+MODEL = os.getenv("SCHOOL_MODEL", "claude-sonnet-5-5")
 MAX_HISTORY = 40
 
-PERSONA = """Bạn là JARVIS, trợ lý ảo trung thành và thông minh, phong cách như JARVIS của Tony Stark.
+PERSONA = """Bạn là SCHOOL, trợ lý ảo trung thành và thông minh, phong cách như SCHOOL của Tony Stark.
 Gọi người dùng là "Sếp". Trả lời bằng tiếng Việt, ngắn gọn, đi thẳng vào trọng tâm, có chút dí dỏm nhẹ.
 Câu trả lời sẽ được đọc thành tiếng: KHÔNG dùng markdown, bảng, emoji, danh sách dài.
 Khi Sếp yêu cầu hành động (mở app, tìm thông tin, chạy lệnh, gọi điện...), hãy dùng công cụ để làm ngay.
@@ -92,7 +92,7 @@ def main() -> None:
         if not os.getenv("OPENAI_API_KEY"):
             sys.exit("Thiếu OPENAI_API_KEY (dùng cho nhận dạng giọng nói) trong School/.env. Hoặc chạy với --text.")
 
-    speak("JARVIS trực tuyến. Sẵn sàng phục vụ Sếp.")
+    speak("SCHOOL trực tuyến. Sẵn sàng phục vụ Sếp.")
     print("Enter: nói chuyện  |  Gõ chữ rồi Enter: nhập bằng bàn phím  |  q: thoát")
 
     while True:

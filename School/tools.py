@@ -1,7 +1,7 @@
-"""Công cụ của JARVIS: điều khiển Mac, đọc web, gọi điện, ghi nhớ.
+"""Công cụ của SCHOOL: điều khiển Mac, đọc web, gọi điện, ghi nhớ.
 
 Hành động có rủi ro (chạy lệnh, ghi file, AppleScript, gọi điện) luôn hỏi xác nhận
-trước khi làm. Đặt JARVIS_AUTO_APPROVE=1 để bỏ qua xác nhận (không khuyến nghị).
+trước khi làm. Đặt SCHOOL_AUTO_APPROVE=1 để bỏ qua xác nhận (không khuyến nghị).
 """
 import base64
 import html
@@ -19,9 +19,9 @@ MAX_OUT = 6000
 
 
 def _confirm(action: str) -> bool:
-    if os.getenv("JARVIS_AUTO_APPROVE") == "1":
+    if os.getenv("SCHOOL_AUTO_APPROVE") == "1":
         return True
-    ans = input(f"\n⚠️  JARVIS muốn: {action}\n   Cho phép? [y/N] ").strip().lower()
+    ans = input(f"\n⚠️  SCHOOL muốn: {action}\n   Cho phép? [y/N] ").strip().lower()
     return ans in ("y", "yes", "c", "có", "co")
 
 
@@ -83,7 +83,7 @@ def write_file(path: str, content: str) -> str:
 # ---------- Internet ----------
 
 def fetch_url(url: str) -> str:
-    req = urllib.request.Request(url, headers={"User-Agent": "JARVIS/1.0"})
+    req = urllib.request.Request(url, headers={"User-Agent": "SCHOOL/1.0"})
     with urllib.request.urlopen(req, timeout=20) as r:
         raw = r.read().decode("utf-8", errors="replace")
     text = re.sub(r"(?is)<(script|style).*?>.*?</\1>", " ", raw)
